@@ -25,6 +25,9 @@
     "type": "git",
     "url": "git+https://github.com/fredsocial/homebridge-tplink-tapo.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "MIT AND Apache-2.0",
   "main": "lib/index.js",
   "files": [
