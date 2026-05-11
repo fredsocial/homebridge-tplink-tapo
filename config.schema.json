@@ -1,0 +1,347 @@
+{
+  "pluginAlias": "TplinkTapo",
+  "pluginType": "platform",
+  "singular": true,
+  "headerDisplay": "TP-Link/Kasa and Tapo Smart Home Plugin.<p>Legacy TP-Link/Kasa devices can be discovered automatically. Tapo devices require username/password and manual host entries.</p>",
+  "footerDisplay": "",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "title": "Name",
+        "type": "string",
+        "default": "TplinkTapo",
+        "minLength": 1
+      },
+      "username": {
+        "title": "Tapo Username",
+        "type": "string",
+        "description": "The username used with the Tapo app.",
+        "default": ""
+      },
+      "password": {
+        "title": "Tapo Password",
+        "type": "string",
+        "description": "The password used with the Tapo app.",
+        "default": ""
+      },
+      "addCustomCharacteristics": {
+        "title": "Adds energy monitoring characteristics viewable in Eve app",
+        "description": "<b>Plug</b>: Amperes, KilowattHours, VoltAmperes, Volts, Watts.<br/><b>Bulb</b>: Watts",
+        "type": "boolean",
+        "default": true
+      },
+      "emeterPollingInterval": {
+        "title": "Energy Monitoring Polling Interval (seconds)",
+        "type": "integer",
+        "description": "How often to check device energy monitoring the background (seconds). Set to 0 to disable.",
+        "placeholder": "20"
+      },
+      "inUseThreshold": {
+        "title": "In Use Threshold (Watts)",
+        "type": "number",
+        "description": "(Watts) For plugs that support energy monitoring (e.g. HS110), min power draw for <b>OutletInUse</b>",
+        "placeholder": "0"
+      },
+      "switchModels": {
+        "type": "array",
+        "description": "Matching models are created in HomeKit as a Switch instead of an Outlet. Default: ['HS200', 'HS210']",
+        "items": {
+          "type": "string"
+        }
+      },
+      "discoveryPort": {
+        "title": "Port",
+        "type": "number",
+        "description": "Port to bind UDP socket for discovery. If port is not specified or is 0, the operating system will attempt to bind to a random port. Default: 0",
+        "placeholder": "0"
+      },
+      "broadcast": {
+        "title": "Broadcast Address",
+        "type": "string",
+        "description": "Broadcast Address. If discovery is not working tweak to match your subnet, eg: 192.168.0.255",
+        "placeholder": "255.255.255.255",
+        "format": "ipv4"
+      },
+      "pollingInterval": {
+        "title": "Polling Interval (seconds)",
+        "type": "integer",
+        "description": "How often to check device status in the background (seconds)",
+        "placeholder": "10"
+      },
+      "deviceTypes": {
+        "title": "Device Types",
+        "type": "array",
+        "description": "Choose which types of devices this plugin should discover",
+        "default": ["plug", "bulb"],
+        "titleMap": [
+          { "name": "Plugs", "value": "plug" },
+          { "name": "Bulbs", "value": "bulb" }
+        ],
+        "items": {
+          "type": "string",
+          "enum": ["plug", "bulb"]
+        }
+      },
+      "macAddresses": {
+        "title": "Allow MAC Addresses",
+        "description": "Allow-list of MAC addresses to include. If specified will ignore other devices. Supports glob-style patterns",
+        "type": "array",
+        "items": {
+          "title": "Mac Address",
+          "type": "string"
+        }
+      },
+      "excludeMacAddresses": {
+        "title": "Exclude MAC Addresses",
+        "description": "Deny-list of MAC addresses to exclude. Supports glob-style patterns",
+        "type": "array",
+        "items": {
+          "title": "Mac Address",
+          "type": "string"
+        }
+      },
+      "devices": {
+        "title": "Manual List Of Devices",
+        "type": "array",
+        "items": {
+          "title": "Device",
+          "type": "object",
+          "required": ["host"],
+          "properties": {
+            "host": {
+              "title": "Host",
+              "type": "string"
+            },
+            "port": {
+              "title": "Port",
+              "type": "number",
+              "placeholder": "9999"
+            },
+            "name": {
+              "title": "Name",
+              "type": "string"
+            },
+            "type": {
+              "title": "Tapo Device Type",
+              "type": "string",
+              "description": "Set this for Tapo devices. Leave unset for legacy TP-Link/Kasa manual devices.",
+              "enum": [
+                "Plug",
+                "P100",
+                "PowerPlug",
+                "P110",
+                "Light",
+                "L510",
+                "WhiteLight",
+                "L520",
+                "ColorLight",
+                "L530"
+              ]
+            },
+            "updateInterval": {
+              "title": "Tapo Update Interval (seconds)",
+              "type": "number",
+              "placeholder": "10"
+            },
+            "timeout": {
+              "title": "Tapo Timeout (seconds)",
+              "type": "number",
+              "placeholder": "2"
+            }
+          }
+        }
+      },
+      "tapoDevices": {
+        "title": "Tapo Devices",
+        "type": "array",
+        "description": "Manual list of Tapo devices. These require Tapo username/password.",
+        "items": {
+          "title": "Tapo Device",
+          "type": "object",
+          "required": ["host"],
+          "properties": {
+            "name": {
+              "title": "Name",
+              "type": "string"
+            },
+            "host": {
+              "title": "Host",
+              "type": "string"
+            },
+            "type": {
+              "title": "Device Type",
+              "type": "string",
+              "default": "Plug",
+              "enum": [
+                "Plug",
+                "P100",
+                "PowerPlug",
+                "P110",
+                "Light",
+                "L510",
+                "WhiteLight",
+                "L520",
+                "ColorLight",
+                "L530"
+              ]
+            },
+            "updateInterval": {
+              "title": "Update Interval (seconds)",
+              "type": "number",
+              "default": 10
+            },
+            "timeout": {
+              "title": "Timeout (seconds)",
+              "type": "number",
+              "default": 2
+            }
+          }
+        }
+      },
+      "timeout": {
+        "title": "Timeout (seconds)",
+        "type": "integer",
+        "description": "(seconds) Communication Timeout",
+        "placeholder": "15"
+      },
+      "transport": {
+        "type": "string",
+        "description": "Use TCP or UDP for device communication. Discovery will always use UDP. Default: TCP",
+        "placeholder": "tcp",
+        "enum": ["tcp", "udp"],
+        "titleMap": [
+          { "name": "TCP", "value": "tcp" },
+          { "name": "UDP", "value": "udp" }
+        ]
+      },
+      "waitTimeUpdate": {
+        "title": "Wait Time Update (ms)",
+        "type": "integer",
+        "description": "The time (ms) to wait to combine similar commands for a device before sending a command to a device. Default: 100.",
+        "placeholder": "100"
+      },
+      "devicesUseDiscoveryPort": {
+        "title": "Devices Use Discovery Port",
+        "description": "When true, sets the device port to the port the device used when responding to the discovery ping. When false, always uses default port (9999). You probably don't want to change this.",
+        "type": "boolean",
+        "default": false
+      }
+    }
+  },
+  "layout": [
+    "name",
+    {
+      "type": "fieldset",
+      "title": "HomeKit (Optional)",
+      "description": "Customize how devices are exposed in HomeKit",
+      "expandable": true,
+      "items": [
+        "addCustomCharacteristics",
+        "emeterPollingInterval",
+        "inUseThreshold",
+        {
+          "key": "switchModels",
+          "type": "array",
+          "buttonText": "Add Switch Model",
+          "items": {
+            "title": "Model",
+            "type": "string",
+            "required": true
+          }
+        }
+      ]
+    },
+    {
+      "type": "fieldset",
+      "title": "Device Discovery (Optional)",
+      "description": "Customize device discovery",
+      "expandable": true,
+      "items": [
+        "broadcast",
+        "pollingInterval",
+        "deviceTypes",
+        "discoveryPort",
+        {
+          "key": "macAddresses",
+          "type": "array",
+          "buttonText": "Add MAC Address",
+          "items": {
+            "title": "Allow MAC Address",
+            "type": "string",
+            "required": true
+          }
+        },
+        {
+          "key": "excludeMacAddresses",
+          "type": "array",
+          "buttonText": "Add MAC Address",
+          "items": {
+            "title": "Exclude MAC Address",
+            "type": "string",
+            "required": true
+          }
+        },
+        {
+          "type": "fieldset",
+          "title": "Manual Discovery",
+          "description": "Use entries without a type for legacy TP-Link/Kasa devices. Use typed entries for Tapo devices.",
+          "expandable": true,
+          "items": [
+            {
+              "key": "devices",
+              "type": "array",
+              "buttonText": "Add Device",
+              "items": [
+                "devices[].host",
+                "devices[].port",
+                "devices[].name",
+                "devices[].type",
+                "devices[].updateInterval",
+                "devices[].timeout"
+              ]
+            },
+            {
+              "type": "help",
+              "helpvalue": "Before resorting to manually specifying devices. Try setting the broadcast address and check your router/switch/firewall configuration. You must assign static IP addresses to your devices to use this configuration."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "fieldset",
+      "title": "Tapo Devices",
+      "description": "Tapo devices require manual host entries and Tapo app credentials.",
+      "expandable": true,
+      "items": [
+        "username",
+        "password",
+        {
+          "key": "tapoDevices",
+          "type": "array",
+          "buttonText": "Add Tapo Device",
+          "items": [
+            "tapoDevices[].name",
+            "tapoDevices[].host",
+            "tapoDevices[].type",
+            "tapoDevices[].updateInterval",
+            "tapoDevices[].timeout"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "fieldset",
+      "title": "Advanced Settings (Optional)",
+      "description": "Don't change these, unless you understand what you're doing.",
+      "expandable": true,
+      "items": [
+        "timeout",
+        "waitTimeUpdate",
+        "transport",
+        "devicesUseDiscoveryPort"
+      ]
+    }
+  ]
+}

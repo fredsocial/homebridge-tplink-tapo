@@ -1,0 +1,9 @@
+homebridge-tplink-tapo combines code from:
+
+- homebridge-tplink-smarthome, Copyright Patrick Seal, MIT License.
+- homebridge-tapo-p100, Copyright its contributors, Apache License 2.0.
+
+The original upstream repositories are:
+
+- https://github.com/plasticrake/homebridge-tplink-smarthome
+- https://github.com/apatsufas/homebridge-tapo-p100

@@ -1,0 +1,93 @@
+import { EventEmitter } from 'events';
+import { HomebridgeAPI } from 'homebridge/lib/api';
+// const rewire = require('rewire');
+
+import TplinkTapoPlatform from '../src/platform';
+
+// const { TplinkAccessory } = require('../lib/tplink-accessory');
+
+import {
+  platformAccessories,
+  platformAccessoriesIssues,
+} from './fixtures/platform-accessories';
+
+const log = () => {};
+log.prefix = '';
+log.debug = () => {};
+log.error = () => {};
+log.info = () => {};
+log.success = () => {};
+log.log = () => {};
+log.warn = () => {};
+
+describe('TplinkTapoPlatform', function () {
+  let platform: TplinkTapoPlatform;
+  let tplinkDevice: EventEmitter;
+  beforeEach(function () {
+    platform = new TplinkTapoPlatform(
+      log,
+      { platform: '', name: 'tplink' },
+      new HomebridgeAPI()
+    );
+
+    tplinkDevice = new EventEmitter();
+    Object.assign(tplinkDevice, {
+      id: 'ABC',
+      deviceType: 'plug',
+      model: 'HS100',
+      supportsDimmer: false,
+      alias: 'TEST',
+    });
+  });
+
+  // describe('~createTplinkAccessory', function () {
+  //   const createTplinkAccessory = TplinkTapoPlatform.__get__(
+  //     'createTplinkAccessory'
+  //   );
+  //   // const platform = { config: { switchModels: ['HS200'] } };
+  //   it('should create TplinkAccessory', function () {
+  //     const accessory = createTplinkAccessory(platform, null, tplinkDevice);
+  //     expect(accessory).to.be.instanceof(TplinkAccessory);
+  //   });
+  // });
+
+  describe('#addAccessory', function () {
+    it.skip('should add platformAccessory to #homebridgeAccessories', function () {});
+  });
+
+  describe('#configureAccessory', function () {
+    platformAccessories.forEach(function (platformAccessory) {
+      describe(platformAccessory.displayName, function () {
+        it('should add platformAccessory to #configuredAccessories', function () {
+          platform.configureAccessory(platformAccessory);
+
+          // eslint-disable-next-line @typescript-eslint/dot-notation
+          const hbAccessories = platform['configuredAccessories'];
+
+          expect(hbAccessories).toBeInstanceOf(Map);
+          expect(hbAccessories).toHaveProperty('size', 1);
+          expect(hbAccessories.get(platformAccessory.UUID)).toBe(
+            platformAccessory
+          );
+        });
+      });
+    });
+
+    describe('Context Missing', function () {
+      it('should add platformAccessory to #configuredAccessories', function () {
+        const platformAccessory =
+          platformAccessoriesIssues.get('CONTEXT_MISSING');
+        platform.configureAccessory(platformAccessory);
+
+        // eslint-disable-next-line @typescript-eslint/dot-notation
+        const hbAccessories = platform['configuredAccessories'];
+
+        expect(hbAccessories).toBeInstanceOf(Map);
+        expect(hbAccessories).toHaveProperty('size', 1);
+        expect(hbAccessories.get(platformAccessory.UUID)).toBe(
+          platformAccessory
+        );
+      });
+    });
+  });
+});
