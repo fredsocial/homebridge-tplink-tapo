@@ -1,7 +1,7 @@
 [
   {
     "fixtureName": "CONTEXT_MISSING",
-    "plugin": "homebridge-tplink-tapo",
+    "plugin": "/homebridge-tplink-tapo",
     "platform": "TplinkTapo",
     "displayName": "HS100 Missing Context",
     "UUID": "bd7d07c7-e291-416f-8376-88ee28db1213",

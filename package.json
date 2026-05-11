@@ -1,5 +1,5 @@
 {
-  "name": "homebridge-tplink-tapo",
+  "name": "@fredsocial/homebridge-tplink-tapo",
   "displayName": "Homebridge TP-Link Tapo",
   "version": "0.1.0",
   "description": "Homebridge plugin for legacy TP-Link/Kasa and newer Tapo devices",

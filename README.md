@@ -21,7 +21,7 @@ Tapo support is configured manually by IP address:
 ## Installation
 
 ```sh
-npm install -g homebridge-tplink-tapo
+npm install -g @fredsocial/homebridge-tplink-tapo
 ```
 
 Node 18 or newer and Homebridge 1.6 or newer are required.

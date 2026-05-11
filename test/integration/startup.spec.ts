@@ -9,6 +9,7 @@ import path from 'path';
 import { PLATFORM_NAME, PLUGIN_NAME } from '../../src/settings';
 
 const platformIdentifier = `${PLUGIN_NAME}.${PLATFORM_NAME}`;
+const HOMEBRIDGE_PLUGIN_NAME = 'homebridge-tplink-tapo';
 
 function getPlugin(homebridgeServer: Server) {
   // @ts-expect-error: Accessing private
@@ -88,7 +89,10 @@ describe('homebridge', function () {
       });
 
       it('plugin was loaded', function () {
-        expect(tplinkSmarthomePlugin).toHaveProperty('pluginName', PLUGIN_NAME);
+        expect(tplinkSmarthomePlugin).toHaveProperty(
+          'pluginName',
+          HOMEBRIDGE_PLUGIN_NAME
+        );
         expect(tplinkSmarthomePlugin).toHaveProperty('disabled', false);
         expect(tplinkSmarthomePlugin).toHaveProperty('pluginPath', pluginPath);
         expect(tplinkSmarthomePlatform).toBeInstanceOf(Function);

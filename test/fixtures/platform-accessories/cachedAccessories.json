@@ -1,5 +1,5 @@
 [{
-  "plugin": "homebridge-tplink-tapo",
+  "plugin": "/homebridge-tplink-tapo",
   "platform": "TplinkTapo",
   "displayName": "Mock HS100",
   "UUID": "bd7d07c7-e291-416f-8376-88ee28db1213",
@@ -150,7 +150,7 @@
     }]
   }]
 }, {
-  "plugin": "homebridge-tplink-tapo",
+  "plugin": "/homebridge-tplink-tapo",
   "platform": "TplinkTapo",
   "displayName": "Mock HS105",
   "UUID": "82957bbc-4c36-4dc1-ac1b-3fa4b4898a41",
@@ -301,7 +301,7 @@
     }]
   }]
 }, {
-  "plugin": "homebridge-tplink-tapo",
+  "plugin": "/homebridge-tplink-tapo",
   "platform": "TplinkTapo",
   "displayName": "Mock HS110",
   "UUID": "9cd1a4ec-dc76-4584-8bc3-ae9dc7bc695a",
@@ -517,7 +517,7 @@
     }]
   }]
 }, {
-  "plugin": "homebridge-tplink-tapo",
+  "plugin": "/homebridge-tplink-tapo",
   "platform": "TplinkTapo",
   "displayName": "Mock HS110v2",
   "UUID": "ac901427-814a-46cb-b0e1-a665c6a01360",
@@ -733,7 +733,7 @@
     }]
   }]
 }, {
-  "plugin": "homebridge-tplink-tapo",
+  "plugin": "/homebridge-tplink-tapo",
   "platform": "TplinkTapo",
   "displayName": "Mock HS200",
   "UUID": "15a02756-487d-4684-84cc-7a8e2c181c44",
@@ -871,7 +871,7 @@
     }]
   }]
 }, {
-  "plugin": "homebridge-tplink-tapo",
+  "plugin": "/homebridge-tplink-tapo",
   "platform": "TplinkTapo",
   "displayName": "Mock HS220",
   "UUID": "0125e88b-a538-4daf-ab69-f846cfc77864",
@@ -1022,7 +1022,7 @@
     }]
   }]
 }, {
-  "plugin": "homebridge-tplink-tapo",
+  "plugin": "/homebridge-tplink-tapo",
   "platform": "TplinkTapo",
   "displayName": "Mock One",
   "UUID": "8b1fc8d8-b6f4-44fb-88bb-c63f2f3acb12",
@@ -1238,7 +1238,7 @@
     }]
   }]
 }, {
-  "plugin": "homebridge-tplink-tapo",
+  "plugin": "/homebridge-tplink-tapo",
   "platform": "TplinkTapo",
   "displayName": "Mock Two",
   "UUID": "4b67830f-5bac-4fab-9083-895180c30346",
@@ -1454,7 +1454,7 @@
     }]
   }]
 }, {
-  "plugin": "homebridge-tplink-tapo",
+  "plugin": "/homebridge-tplink-tapo",
   "platform": "TplinkTapo",
   "displayName": "Mock Three",
   "UUID": "784e86b6-abb9-471d-bc3c-7dd1ec2e3503",
@@ -1670,7 +1670,7 @@
     }]
   }]
 }, {
-  "plugin": "homebridge-tplink-tapo",
+  "plugin": "/homebridge-tplink-tapo",
   "platform": "TplinkTapo",
   "displayName": "Mock Four",
   "UUID": "5f9294f1-5b5f-4500-8220-8a8457461feb",
@@ -1886,7 +1886,7 @@
     }]
   }]
 }, {
-  "plugin": "homebridge-tplink-tapo",
+  "plugin": "/homebridge-tplink-tapo",
   "platform": "TplinkTapo",
   "displayName": "Mock Five",
   "UUID": "e234fa5c-e0d7-434e-8563-e7ed029c9aae",
@@ -2102,7 +2102,7 @@
     }]
   }]
 }, {
-  "plugin": "homebridge-tplink-tapo",
+  "plugin": "/homebridge-tplink-tapo",
   "platform": "TplinkTapo",
   "displayName": "Mock Six",
   "UUID": "6dfd1e13-5bd0-45af-8c2d-22624bd596e9",
@@ -2318,7 +2318,7 @@
     }]
   }]
 }, {
-  "plugin": "homebridge-tplink-tapo",
+  "plugin": "/homebridge-tplink-tapo",
   "platform": "TplinkTapo",
   "displayName": "Mock LB100",
   "UUID": "83fc30e4-cfda-47d1-93e2-899995a4a878",
@@ -2482,7 +2482,7 @@
     }]
   }]
 }, {
-  "plugin": "homebridge-tplink-tapo",
+  "plugin": "/homebridge-tplink-tapo",
   "platform": "TplinkTapo",
   "displayName": "Mock LB120",
   "UUID": "4130cfc7-9dfe-4bfb-bb80-356bf73d4acc",
@@ -2659,7 +2659,7 @@
     }]
   }]
 }, {
-  "plugin": "homebridge-tplink-tapo",
+  "plugin": "/homebridge-tplink-tapo",
   "platform": "TplinkTapo",
   "displayName": "Mock LB130",
   "UUID": "46bc277f-e136-4ad8-ad82-84cf195708da",
