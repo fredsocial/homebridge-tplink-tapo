@@ -47,6 +47,8 @@ export class ConfigParseError extends Error {
 }
 export interface DeviceConfigInput {
   host: string;
+  ip?: string | undefined;
+  address?: string | undefined;
   port?: number | undefined;
   name?: string | undefined;
   type?: string | undefined;
@@ -56,6 +58,8 @@ export interface DeviceConfigInput {
 
 export interface TapoDeviceConfigInput {
   host: string;
+  ip?: string | undefined;
+  address?: string | undefined;
   port?: number | undefined;
   name?: string | undefined;
   type?: string | undefined;
@@ -259,6 +263,8 @@ function isDeviceConfigInput(value: unknown): value is DeviceConfigInput {
     isObjectLike(value) &&
     'host' in value &&
     typeof value.host === 'string' &&
+    (!('ip' in value) || typeof value.ip === 'string') &&
+    (!('address' in value) || typeof value.address === 'string') &&
     (!('port' in value) || typeof value.port === 'number') &&
     (!('name' in value) || typeof value.name === 'string') &&
     (!('type' in value) || typeof value.type === 'string') &&
@@ -313,22 +319,50 @@ function isTplinkSmarthomeConfigInput(
   );
 }
 
+function normalizeDeviceConfig(value: unknown): unknown {
+  if (!isObjectLike(value)) return value;
+  let host: string | undefined;
+  if ('host' in value && typeof value.host === 'string') {
+    host = value.host;
+  } else if ('ip' in value && typeof value.ip === 'string') {
+    host = value.ip;
+  } else if ('address' in value && typeof value.address === 'string') {
+    host = value.address;
+  }
+
+  return host === undefined ? value : { ...value, host };
+}
+
+function normalizeConfig(
+  config: Record<string, unknown>
+): Record<string, unknown> {
+  const normalized = { ...config };
+  if (Array.isArray(normalized.devices)) {
+    normalized.devices = normalized.devices.map(normalizeDeviceConfig);
+  }
+  if (Array.isArray(normalized.tapoDevices)) {
+    normalized.tapoDevices = normalized.tapoDevices.map(normalizeDeviceConfig);
+  }
+  return normalized;
+}
+
 export function parseConfig(
   config: Record<string, unknown>
 ): TplinkSmarthomeConfig {
+  const normalizedConfig = normalizeConfig(config);
   const ajv = new Ajv({ allErrors: true });
   addFormats(ajv);
   ajv.addVocabulary(['placeholder', 'titleMap']);
   // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
   const validate = ajv.compile(require('../config.schema.json').schema);
-  const valid = validate(config);
+  const valid = validate(normalizedConfig);
   if (!valid)
     throw new ConfigParseError('Error parsing config', validate.errors);
 
-  if (!isTplinkSmarthomeConfigInput(config))
+  if (!isTplinkSmarthomeConfigInput(normalizedConfig))
     throw new ConfigParseError('Error parsing config');
 
-  const c = defaults(config, defaultConfig);
+  const c = defaults(normalizedConfig, defaultConfig);
 
   const defaultSendOptions = {
     timeout: c.timeout * 1000,

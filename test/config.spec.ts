@@ -77,5 +77,21 @@ describe('config', function () {
         .toThrow(ConfigParseError)
         .toThrow("`devices/0` must have required property 'host'");
     });
+
+    it('should normalize ip and address aliases to host', function () {
+      expect(
+        parseConfig({
+          devices: [{ ip: '192.168.1.10' }],
+          tapoDevices: [{ address: '192.168.1.20', name: 'Tapo Plug' }],
+        })
+      ).toMatchObject({
+        discoveryOptions: {
+          devices: [{ host: '192.168.1.10' }],
+        },
+        tapo: {
+          devices: [{ host: '192.168.1.20', name: 'Tapo Plug' }],
+        },
+      });
+    });
   });
 });
