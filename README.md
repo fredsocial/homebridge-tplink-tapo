@@ -195,3 +195,16 @@ This project incorporates work from:
 - `apatsufas/homebridge-tapo-p100` for local Tapo protocol support.
 
 See `LICENSE` for the inherited license terms.
+
+## Dependency maintenance
+
+Use Node 22 for development and `npm ci` to reproduce the committed lockfile.
+Security maintenance updates existing dependencies, including UUID 11.1.1,
+and overrides minimatch only inside the TypeScript lint parser. This
+development override requires Node 20.19 or newer; the plugin runtime
+requirement remains Node 18 or newer. UUID's CommonJS `v4` API is retained.
+
+Validate changes with `npm run build`, `npm run lint`, and the configuration
+and utility unit tests. Hardware-discovery integration tests require an
+isolated network; do not start them against an existing home installation.
+Current upstream picomatch advisories still require a published fix.
