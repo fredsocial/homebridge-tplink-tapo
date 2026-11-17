@@ -68,7 +68,7 @@
     "semver": "^7.7.4",
     "tplink-smarthome-api": "~5.0.0",
     "utf8": "^3.0.0",
-    "uuid": "10.0.0"
+    "uuid": "11.1.1"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
@@ -111,6 +111,11 @@
   "commit-and-tag-version": {
     "scripts": {
       "prerelease": "npm test"
+    }
+  },
+  "overrides": {
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "11.0.1"
     }
   }
 }
